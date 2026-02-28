@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 228 100% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 192 68% 38%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 228 38% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 196 30% 93%;
+    --muted-foreground: 222 20% 45%;
+    --accent: 43 74% 85%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 15 73% 66%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 196 30% 87%;
+    --input: 196 30% 87%;
+    --ring: 192 68% 38%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 196 30% 95%;
+    --card: 222 47% 11%;
+    --card-foreground: 196 30% 95%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 196 30% 95%;
+    --primary: 192 58% 48%;
+    --primary-foreground: 222 47% 7%;
+    --secondary: 192 30% 20%;
+    --secondary-foreground: 196 30% 95%;
+    --muted: 222 30% 18%;
+    --muted-foreground: 196 20% 65%;
+    --accent: 43 50% 30%;
+    --accent-foreground: 43 74% 85%;
+    --destructive: 15 73% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 192 58% 48%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-seafoam text-ocean-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* Mapbox overrides */
+.mapboxgl-map {
+  font-family: var(--font-inter), sans-serif;
+}
+.mapboxgl-popup-content {
+  @apply rounded-xl shadow-xl border border-ocean-100 p-0 overflow-hidden;
+}
+.mapboxgl-popup-close-button {
+  @apply text-ocean-500 hover:text-ocean-700 text-xl p-1 pr-2;
+}
+.mapboxgl-ctrl-group {
+  @apply rounded-lg overflow-hidden shadow-md;
+}
+
+/* Audio waveform */
+.waveform-container wave {
+  overflow: hidden !important;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus ring */
+:focus-visible {
+  @apply outline-none ring-2 ring-ocean-400 ring-offset-2;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-ocean-200 text-ocean-900;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-seafoam;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-ocean-300 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-ocean-400;
+}
+
+/* Wave animation for loading states */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(196 30% 93%) 25%,
+    hsl(196 30% 88%) 50%,
+    hsl(196 30% 93%) 75%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
