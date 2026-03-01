@@ -15,12 +15,12 @@ export function UserMenu() {
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {
       if (data.user) {
-        supabase
-          .from('profiles')
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (supabase.from('profiles') as any)
           .select('full_name, role')
           .eq('id', data.user.id)
           .single()
-          .then(({ data: profile }) => {
+          .then(({ data: profile }: { data: { full_name: string | null } | null }) => {
             setUser({
               email: data.user!.email ?? '',
               name: profile?.full_name ?? null,
