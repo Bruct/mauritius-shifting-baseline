@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/lib/i18n/routing';
 import { User, LogOut, Settings, ChevronDown } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
-import { cn } from '@/lib/utils';
 
 export function UserMenu() {
   const t = useTranslations('nav');

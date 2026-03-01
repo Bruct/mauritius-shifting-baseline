@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import Map, { NavigationControl, Marker } from 'react-map-gl';
+import Map, { Marker } from 'react-map-gl';
 import type { MapMouseEvent } from 'mapbox-gl';
 import {
   MAURITIUS_CENTER,

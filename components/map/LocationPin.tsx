@@ -3,7 +3,6 @@
 import { Marker } from 'react-map-gl';
 import { motion } from 'framer-motion';
 import type { LocationWithCount } from '@/lib/supabase/types';
-import { cn } from '@/lib/utils';
 
 interface LocationPinProps {
   location: LocationWithCount;
