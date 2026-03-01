@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { MapPin, User, Calendar, Globe, Image, Mic } from 'lucide-react';
+import { MapPin, User, Calendar, Globe, Image as ImageIcon, Mic } from 'lucide-react';
 import { formatYear, presenceColors } from '@/lib/utils';
 import type { WizardData } from '../SubmissionWizard';
 
@@ -100,7 +100,7 @@ export function Step6Review({ data, species, locale }: Step6Props) {
             <div className="flex gap-3">
               {data.media_files.filter((f) => f.type === 'photo').length > 0 && (
                 <span className="flex items-center gap-1 text-xs text-ocean-600">
-                  <Image className="h-3.5 w-3.5" />
+                  <ImageIcon className="h-3.5 w-3.5" />
                   {data.media_files.filter((f) => f.type === 'photo').length} photo(s)
                 </span>
               )}

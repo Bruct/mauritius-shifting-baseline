@@ -1,11 +1,9 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Info } from 'lucide-react';
 
 export function MapLegend() {
-  const t = useTranslations('map');
   const [visible, setVisible] = useState(false);
 
   return (

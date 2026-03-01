@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
-import { Image, Mic, X, Upload, StopCircle } from 'lucide-react';
+import { Image as ImageIcon, Mic, X, Upload, StopCircle } from 'lucide-react';
 import type { WizardData } from '../SubmissionWizard';
 
 interface Step5Props {
@@ -71,7 +71,7 @@ export function Step5Media({ data, onUpdate }: Step5Props) {
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-semibold text-ocean-800 flex items-center gap-1.5">
-            <Image className="h-4 w-4" /> Photos
+            <ImageIcon className="h-4 w-4" /> Photos
           </h3>
           <button
             onClick={() => photoInputRef.current?.click()}
