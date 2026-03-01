@@ -1,4 +1,4 @@
-import { Fish, Heart, ExternalLink } from 'lucide-react';
+import { Fish, Heart } from 'lucide-react';
 import { Link } from '@/lib/i18n/routing';
 
 export function Footer() {

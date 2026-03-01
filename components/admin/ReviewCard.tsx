@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CheckCircle, XCircle, MapPin, User, Calendar, Globe, Mic, Image } from 'lucide-react';
+import { CheckCircle, XCircle, MapPin, User, Calendar, Globe, Mic, Image as ImageIcon } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { formatYear, truncate } from '@/lib/utils';
 
@@ -80,7 +80,7 @@ export function ReviewCard({ testimony }: { testimony: ReviewTestimony }) {
             )}
             {testimony.testimony_media.some((m) => m.media_type === 'photo') && (
               <span className="p-1 bg-ocean-50 rounded text-ocean-500" title="Has photos">
-                <Image className="h-3.5 w-3.5" />
+                <ImageIcon className="h-3.5 w-3.5" />
               </span>
             )}
           </div>
