@@ -141,7 +141,8 @@ export function SubmissionWizard({
             console.warn('Media upload failed:', uploadErr.message);
             continue;
           }
-          await supabase.from('testimony_media').insert({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          await (supabase.from('testimony_media') as any).insert({
             testimony_id: result.testimonyId,
             media_type: item.type,
             storage_path: path,

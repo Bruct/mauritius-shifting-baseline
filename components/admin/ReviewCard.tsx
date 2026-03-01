@@ -32,8 +32,8 @@ export function ReviewCard({ testimony }: { testimony: ReviewTestimony }) {
   const handleAction = async (status: 'published' | 'rejected') => {
     setSubmitting(true);
     const supabase = createClient();
-    await supabase
-      .from('testimonies')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (supabase.from('testimonies') as any)
       .update({ status, reviewer_notes: notes || null })
       .eq('id', testimony.id);
     router.refresh();
