@@ -35,7 +35,7 @@ export function LocationPopup({ location, decadeFilter, onClose }: LocationPopup
     }
 
     query.then(({ data }) => {
-      setTestimonies(data ?? []);
+      setTestimonies((data as Testimony[] | null) ?? []);
       setLoading(false);
     });
   }, [location.id, decadeFilter]);
