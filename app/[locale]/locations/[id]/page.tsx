@@ -10,6 +10,29 @@ interface PageProps {
   params: Promise<{ id: string; locale: string }>;
 }
 
+type LocationRow = {
+  id: string;
+  name: string;
+  description: string | null;
+  latitude: number;
+  longitude: number;
+  created_by: string | null;
+  created_at: string;
+};
+
+type LocationTestimony = {
+  id: string;
+  title: string;
+  testimony_text: string;
+  narrator_name: string | null;
+  narrator_profession: string | null;
+  year_of_memory: number;
+  year_of_memory_end: number | null;
+  language: string;
+  created_at: string;
+  testimony_media: { id: string; media_type: string }[];
+};
+
 async function getLocation(id: string) {
   const supabase = await createClient();
   const [locationRes, testimoniesRes] = await Promise.all([
@@ -26,8 +49,8 @@ async function getLocation(id: string) {
       .order('year_of_memory', { ascending: true }),
   ]);
   return {
-    location: locationRes.data,
-    testimonies: testimoniesRes.data ?? [],
+    location: locationRes.data as LocationRow | null,
+    testimonies: (testimoniesRes.data as LocationTestimony[] | null) ?? [],
   };
 }
 
