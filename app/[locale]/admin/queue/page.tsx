@@ -48,6 +48,7 @@ export default async function ReviewQueuePage() {
             <p className="text-ocean-400">No testimonies pending review. All clear! 🌊</p>
           </div>
         ) : (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           testimonies.map((t) => <ReviewCard key={t.id} testimony={t as any} />)
         )}
       </div>

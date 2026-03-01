@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Volume2 } from 'lucide-react';
+import type WaveSurferType from 'wavesurfer.js';
 
 interface AudioPlayerProps {
   src: string;
@@ -10,14 +11,14 @@ interface AudioPlayerProps {
 
 export function AudioPlayer({ src, className }: AudioPlayerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const wavesurferRef = useRef<unknown>(null);
+  const wavesurferRef = useRef<WaveSurferType | null>(null);
   const [playing, setPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    let ws: unknown;
+    let ws: WaveSurferType | null = null;
 
     async function initWavesurfer() {
       if (!containerRef.current) return;
@@ -34,12 +35,12 @@ export function AudioPlayer({ src, className }: AudioPlayerProps) {
         url: src,
       });
 
-      (ws as any).on('ready', (dur: number) => {
+      ws.on('ready', (dur: number) => {
         setDuration(dur);
         setReady(true);
       });
-      (ws as any).on('timeupdate', (time: number) => setCurrentTime(time));
-      (ws as any).on('finish', () => setPlaying(false));
+      ws.on('timeupdate', (time: number) => setCurrentTime(time));
+      ws.on('finish', () => setPlaying(false));
 
       wavesurferRef.current = ws;
     }
@@ -47,13 +48,13 @@ export function AudioPlayer({ src, className }: AudioPlayerProps) {
     initWavesurfer();
 
     return () => {
-      (ws as any)?.destroy();
+      ws?.destroy();
     };
   }, [src]);
 
   const togglePlay = () => {
     if (!wavesurferRef.current) return;
-    (wavesurferRef.current as any).playPause();
+    wavesurferRef.current.playPause();
     setPlaying(!playing);
   };
 

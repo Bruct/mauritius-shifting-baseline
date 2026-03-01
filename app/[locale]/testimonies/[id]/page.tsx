@@ -150,6 +150,7 @@ export default async function TestimonyPage({ params }: PageProps) {
             <h2 className="font-display font-semibold text-ocean-900 mb-3">
               🐠 {t('species_mentioned')}
             </h2>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <SpeciesTags
               tags={speciesTags as any}
               locale={locale}

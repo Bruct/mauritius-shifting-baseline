@@ -32,6 +32,7 @@ export function FeaturedTestimonies({ testimonies }: FeaturedTestimoniesProps) {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonies.map((testimony) => (
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <TestimonyCard
               key={testimony.id}
               testimony={testimony as any}

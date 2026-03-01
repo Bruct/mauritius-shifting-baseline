@@ -1,5 +1,5 @@
 import { Link } from '@/lib/i18n/routing';
-import { Calendar, MapPin, User, Mic, Image } from 'lucide-react';
+import { MapPin, User, Mic, Image as ImageIcon } from 'lucide-react';
 import { formatYear, truncate, cn } from '@/lib/utils';
 import type { TestimonyFull } from '@/lib/supabase/types';
 
@@ -63,7 +63,7 @@ export function TestimonyCard({ testimony, compact = false }: TestimonyCardProps
             )}
             {hasPhoto && (
               <span className="flex items-center gap-0.5 text-xs text-ocean-400">
-                <Image className="h-3 w-3" />
+                <ImageIcon className="h-3 w-3" />
               </span>
             )}
           </div>

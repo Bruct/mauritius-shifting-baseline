@@ -119,6 +119,7 @@ export default async function LocationPage({ params }: PageProps) {
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {byDecade[decade].map((testimony) => (
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                     <TestimonyCard
                       key={testimony.id}
                       testimony={{

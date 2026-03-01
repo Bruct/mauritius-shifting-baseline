@@ -1,5 +1,4 @@
 import { cn, presenceColors, presenceIcons } from '@/lib/utils';
-import type { TestimonyFull } from '@/lib/supabase/types';
 
 type SpeciesTag = {
   presence: string;
