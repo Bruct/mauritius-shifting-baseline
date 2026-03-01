@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/lib/i18n/routing';
-import { Menu, X, Fish, Globe } from 'lucide-react';
+import { Menu, X, Fish } from 'lucide-react';
 import { LocaleSwitcher } from './LocaleSwitcher';
 import { UserMenu } from './UserMenu';
 import { cn } from '@/lib/utils';
