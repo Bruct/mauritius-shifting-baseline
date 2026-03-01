@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
 import { Link } from '@/lib/i18n/routing';
 import { createClient } from '@/lib/supabase/server';
 import { TestimonyCard } from '@/components/testimony/TestimonyCard';
@@ -118,16 +117,11 @@ export default async function LocationPage({ params }: PageProps) {
                   <div className="h-px flex-1 bg-ocean-200" />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {byDecade[decade].map((testimony) => (
-                    <TestimonyCard
-                      key={testimony.id}
-                      testimony={{
-                        ...testimony,
-                        testimony_media: testimony.testimony_media,
-                        locations: { id, name: location.name, latitude: location.latitude, longitude: location.longitude },
-                      } as any}
-                    />
-                  ))}
+                  {byDecade[decade].map((testimony) => {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    const props = { ...testimony, locations: { id, name: location.name, latitude: location.latitude, longitude: location.longitude } } as any;
+                    return <TestimonyCard key={testimony.id} testimony={props} />;
+                  })}
                 </div>
               </div>
             ))}

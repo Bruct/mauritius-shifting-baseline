@@ -48,6 +48,8 @@ export default async function TestimonyPage({ params }: PageProps) {
   const photos = testimony.testimony_media?.filter((m) => m.media_type === 'photo') ?? [];
   const audios = testimony.testimony_media?.filter((m) => m.media_type === 'audio') ?? [];
   const speciesTags = testimony.testimony_species ?? [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const typedSpeciesTags = speciesTags as any;
 
   const LANG_LABELS: Record<string, string> = { en: 'English', fr: 'Français', mfe: 'Kreol' };
 
@@ -150,9 +152,8 @@ export default async function TestimonyPage({ params }: PageProps) {
             <h2 className="font-display font-semibold text-ocean-900 mb-3">
               🐠 {t('species_mentioned')}
             </h2>
-            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             <SpeciesTags
-              tags={speciesTags as any}
+              tags={typedSpeciesTags}
               locale={locale}
             />
             <div className="mt-3 flex flex-wrap gap-3 text-xs text-ocean-500">
