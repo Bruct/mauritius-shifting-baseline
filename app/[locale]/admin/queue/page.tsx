@@ -6,7 +6,24 @@ import { Link } from '@/lib/i18n/routing';
 
 export const metadata: Metadata = { title: 'Review Queue' };
 
-async function getPendingTestimonies() {
+type PendingTestimony = {
+  id: string;
+  title: string;
+  testimony_text: string;
+  narrator_name: string | null;
+  narrator_age: number | null;
+  narrator_profession: string | null;
+  year_of_memory: number;
+  year_of_memory_end: number | null;
+  language: string;
+  status: string;
+  created_at: string;
+  locations: { id: string; name: string } | null;
+  testimony_media: { id: string; media_type: string; storage_path: string }[];
+  testimony_species: { species_id: string; presence: string; species: { common_name_en: string | null } | null }[];
+};
+
+async function getPendingTestimonies(): Promise<PendingTestimony[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('testimonies')
@@ -19,7 +36,7 @@ async function getPendingTestimonies() {
     `)
     .eq('status', 'pending')
     .order('created_at', { ascending: true });
-  return data ?? [];
+  return (data as PendingTestimony[] | null) ?? [];
 }
 
 export default async function ReviewQueuePage() {
@@ -48,8 +65,7 @@ export default async function ReviewQueuePage() {
             <p className="text-ocean-400">No testimonies pending review. All clear! 🌊</p>
           </div>
         ) : (
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          testimonies.map((t) => <ReviewCard key={t.id} testimony={t as any} />)
+          testimonies.map((t) => <ReviewCard key={t.id} testimony={t} />)
         )}
       </div>
     </div>
