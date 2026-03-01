@@ -6,11 +6,12 @@ import { Link } from '@/lib/i18n/routing';
 import { User, LogOut, Settings, ChevronDown } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 
+const supabase = createClient();
+
 export function UserMenu() {
   const t = useTranslations('nav');
   const [user, setUser] = useState<{ email: string; name: string | null } | null>(null);
   const [open, setOpen] = useState(false);
-  const supabase = createClient();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data }) => {

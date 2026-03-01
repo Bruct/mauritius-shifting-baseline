@@ -96,6 +96,7 @@ export function Step5Media({ data, onUpdate }: Step5Props) {
               const idx = data.media_files.indexOf(item);
               return (
                 <div key={i} className="relative aspect-square rounded-lg overflow-hidden bg-ocean-50 border border-ocean-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={URL.createObjectURL(item.file)}
                     alt="Preview"
