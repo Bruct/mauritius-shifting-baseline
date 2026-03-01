@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
-import Map, { NavigationControl, GeolocateControl, Source, Layer, type MapRef } from 'react-map-gl';
+import Map, { NavigationControl, GeolocateControl, type MapRef } from 'react-map-gl';
 import type { MapMouseEvent, LngLatBoundsLike } from 'mapbox-gl';
 import {
   MAURITIUS_CENTER,

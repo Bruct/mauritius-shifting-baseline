@@ -17,7 +17,6 @@ interface LocationPopupProps {
 
 export function LocationPopup({ location, decadeFilter, onClose }: LocationPopupProps) {
   const t = useTranslations('map');
-  const tTestimony = useTranslations('testimony');
   const [testimonies, setTestimonies] = useState<Testimony[]>([]);
   const [loading, setLoading] = useState(true);
 

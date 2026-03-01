@@ -80,7 +80,6 @@ export function SubmissionWizard({
   existingLocations,
   defaultLocationId,
   locale,
-  userId: _userId,
 }: SubmissionWizardProps) {
   const t = useTranslations('submission');
   const router = useRouter();
