@@ -42,12 +42,9 @@ export default function SignupPage() {
 
     // Create profile
     if (data.user) {
-      await supabase.from('profiles').insert({
-        id: data.user.id,
-        full_name: form.full_name || null,
-        organization: form.organization || null,
-        role: 'collector',
-      });
+      const profile = { id: data.user.id, full_name: form.full_name || null, organization: form.organization || null, role: 'collector' };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await supabase.from('profiles').insert(profile as any);
     }
 
     router.push('/testimonies/submit');
