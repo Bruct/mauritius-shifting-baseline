@@ -8,6 +8,18 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('title') };
 }
 
+type SpeciesWithRawCount = {
+  id: string;
+  common_name_en: string | null;
+  common_name_fr: string | null;
+  common_name_mfe: string | null;
+  scientific_name: string | null;
+  species_type: string | null;
+  image_url: string | null;
+  description: string | null;
+  testimony_species: { count: number }[];
+};
+
 async function getSpeciesWithCounts() {
   const supabase = await createClient();
   const { data } = await supabase
@@ -19,9 +31,9 @@ async function getSpeciesWithCounts() {
     `)
     .order('common_name_en');
 
-  return (data ?? []).map((s) => ({
+  return ((data as SpeciesWithRawCount[] | null) ?? []).map((s) => ({
     ...s,
-    testimony_count: (s.testimony_species as unknown as [{ count: number }])?.[0]?.count ?? 0,
+    testimony_count: s.testimony_species?.[0]?.count ?? 0,
   }));
 }
 

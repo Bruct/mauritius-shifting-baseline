@@ -8,6 +8,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('title') };
 }
 
+type LocationWithRawCount = {
+  id: string;
+  name: string;
+  description: string | null;
+  latitude: number;
+  longitude: number;
+  created_at: string;
+  testimonies: { count: number }[];
+};
+
 async function getLocationsWithCounts() {
   const supabase = await createClient();
   const { data } = await supabase
@@ -17,9 +27,9 @@ async function getLocationsWithCounts() {
       testimonies(count)
     `);
 
-  return (data ?? []).map((loc) => ({
+  return ((data as LocationWithRawCount[] | null) ?? []).map((loc) => ({
     ...loc,
-    testimony_count: (loc.testimonies as unknown as [{ count: number }])?.[0]?.count ?? 0,
+    testimony_count: loc.testimonies?.[0]?.count ?? 0,
     created_by: null,
   }));
 }

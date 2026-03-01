@@ -26,6 +26,7 @@ export interface Database {
           role?: UserRole;
           organization?: string | null;
         };
+        Relationships: [];
       };
       locations: {
         Row: {
@@ -52,6 +53,7 @@ export interface Database {
           latitude?: number;
           longitude?: number;
         };
+        Relationships: [];
       };
       testimonies: {
         Row: {
@@ -101,6 +103,7 @@ export interface Database {
           status?: TestimonyStatus;
           reviewer_notes?: string | null;
         };
+        Relationships: [];
       };
       testimony_media: {
         Row: {
@@ -122,6 +125,7 @@ export interface Database {
         Update: {
           caption?: string | null;
         };
+        Relationships: [];
       };
       species: {
         Row: {
@@ -153,6 +157,7 @@ export interface Database {
           image_url?: string | null;
           description?: string | null;
         };
+        Relationships: [];
       };
       testimony_species: {
         Row: {
@@ -171,6 +176,7 @@ export interface Database {
           presence?: SpeciesPresence;
           notes?: string | null;
         };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
@@ -181,6 +187,7 @@ export interface Database {
       media_type: MediaType;
       species_presence: SpeciesPresence;
     };
+    CompositeTypes: Record<string, never>;
   };
 }
 

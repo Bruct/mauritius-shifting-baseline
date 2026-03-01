@@ -33,8 +33,8 @@ export async function submitTestimony(
   // 1. Create or use existing location
   let locationId = payload.location_id;
   if (!locationId && payload.latitude != null && payload.longitude != null) {
-    const { data: loc, error: locErr } = await supabase
-      .from('locations')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { data: loc, error: locErr } = await (supabase.from('locations') as any)
       .insert({
         name: payload.location_name,
         description: payload.location_description || null,
@@ -43,16 +43,16 @@ export async function submitTestimony(
         created_by: user.id,
       })
       .select('id')
-      .single();
+      .single() as { data: { id: string } | null; error: { message: string } | null };
     if (locErr) return { success: false, error: `Location: ${locErr.message}` };
-    locationId = loc.id;
+    locationId = loc!.id;
   }
 
   if (!locationId) return { success: false, error: 'No location selected or created.' };
 
   // 2. Create testimony
-  const { data: testimony, error: testErr } = await supabase
-    .from('testimonies')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data: testimony, error: testErr } = await (supabase.from('testimonies') as any)
     .insert({
       location_id: locationId,
       submitted_by: user.id,
@@ -68,21 +68,22 @@ export async function submitTestimony(
       status: 'pending',
     })
     .select('id')
-    .single();
+    .single() as { data: { id: string } | null; error: { message: string } | null };
   if (testErr) return { success: false, error: `Testimony: ${testErr.message}` };
 
   // 3. Insert species tags
   if (payload.species_tags.length > 0) {
-    const { error: speciesErr } = await supabase.from('testimony_species').insert(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error: speciesErr } = await (supabase.from('testimony_species') as any).insert(
       payload.species_tags.map((tag) => ({
-        testimony_id: testimony.id,
+        testimony_id: testimony!.id,
         species_id: tag.species_id,
-        presence: tag.presence as 'abundant' | 'present' | 'rare' | 'absent',
+        presence: tag.presence,
         notes: tag.notes ?? null,
       })),
-    );
+    ) as { error: { message: string } | null };
     if (speciesErr) return { success: false, error: `Species: ${speciesErr.message}` };
   }
 
-  return { success: true, testimonyId: testimony.id };
+  return { success: true, testimonyId: testimony!.id };
 }

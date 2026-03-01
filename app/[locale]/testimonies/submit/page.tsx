@@ -9,22 +9,38 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t('title') };
 }
 
-async function getSpecies() {
+type SpeciesRow = {
+  id: string;
+  common_name_en: string | null;
+  common_name_fr: string | null;
+  common_name_mfe: string | null;
+  scientific_name: string | null;
+  species_type: string | null;
+};
+
+type LocationRow = {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+};
+
+async function getSpecies(): Promise<SpeciesRow[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('species')
     .select('id, common_name_en, common_name_fr, common_name_mfe, scientific_name, species_type')
     .order('common_name_en');
-  return data ?? [];
+  return (data as SpeciesRow[] | null) ?? [];
 }
 
-async function getLocations() {
+async function getLocations(): Promise<LocationRow[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('locations')
     .select('id, name, latitude, longitude')
     .order('name');
-  return data ?? [];
+  return (data as LocationRow[] | null) ?? [];
 }
 
 export default async function SubmitPage({
