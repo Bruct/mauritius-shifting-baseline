@@ -25,14 +25,24 @@ async function getStats() {
   };
 }
 
-async function getRecentTestimonies() {
+type RecentTestimony = {
+  id: string;
+  title: string;
+  status: string | null;
+  narrator_name: string | null;
+  year_of_memory: number;
+  created_at: string;
+  locations: { name: string } | null;
+};
+
+async function getRecentTestimonies(): Promise<RecentTestimony[]> {
   const supabase = await createClient();
   const { data } = await supabase
     .from('testimonies')
     .select('id, title, status, narrator_name, year_of_memory, created_at, locations(name)')
     .order('created_at', { ascending: false })
     .limit(5);
-  return data ?? [];
+  return (data as RecentTestimony[] | null) ?? [];
 }
 
 export default async function AdminDashboard() {
